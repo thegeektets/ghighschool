@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="termlyfeesreport" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d4a46e8b-ce8f-4e7a-a95c-d12f8174ed1c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     feesstructure.`key` AS feesstructure_key,
+     feesstructure.`year` AS feesstructure_year,
+     feesstructure.`term` AS feesstructure_term,
+     feesstructure.`total` AS feesstructure_total,
+     feesstructure.`class` AS feesstructure_class,
+     feespayment.`key` AS feespayment_key,
+     feespayment.`year` AS feespayment_year,
+     feespayment.`term` AS feespayment_term,
+     feespayment.`studentadm` AS feespayment_studentadm,
+     feespayment.`newbalance` AS feespayment_newbalance,
+     student.`studentnumber` AS student_studentnumber,
+     student.`studentname` AS student_studentname,
+     student.`sex` AS student_sex,
+     student.`stream` AS student_stream,
+     student.`House` AS student_House,
+     student.`DOA` AS student_DOA,
+     student.`Class` AS student_Class,
+     student.`ParentsId` AS student_ParentsId,
+     student.`Bcertnumber` AS student_Bcertnumber,
+     student.`spic` AS student_spic,
+     student.`sport` AS student_sport,
+     student.`kcpe` AS student_kcpe,
+     student.`club` AS student_club,
+     student.`society` AS student_society,
+     student.`family` AS student_family,
+     student.`cclass` AS student_cclass,
+     student.`religion` AS student_religion,
+     student.`dob` AS student_dob,
+     school.`sname` AS school_sname,
+     school.`scpic` AS school_scpic,
+     school.`address` AS school_address,
+     school.`location` AS school_location,
+     feesinstallments.`amount` AS feesinstallments_amount,
+     feesinstallments.`key` AS feesinstallments_key,
+     feesinstallments.`date` AS feesinstallments_date
+FROM
+     `feespayment` feespayment INNER JOIN `student` student ON feespayment.`studentadm` = student.`studentnumber`
+     INNER JOIN `feesstructure` feesstructure ON student.`cclass` = feesstructure.`class`
+     AND feesstructure.`year` = feespayment.`year`
+     AND feesstructure.`term` = feespayment.`term`
+     INNER JOIN `feesinstallments` feesinstallments ON feespayment.`key` = feesinstallments.`key`,
+     `school` school]]>
+	</queryString>
+	<field name="feesstructure_key" class="java.lang.String"/>
+	<field name="feesstructure_year" class="java.lang.Integer"/>
+	<field name="feesstructure_term" class="java.lang.Integer"/>
+	<field name="feesstructure_total" class="java.lang.Integer"/>
+	<field name="feesstructure_class" class="java.lang.Integer"/>
+	<field name="feespayment_key" class="java.lang.String"/>
+	<field name="feespayment_year" class="java.lang.Integer"/>
+	<field name="feespayment_term" class="java.lang.Integer"/>
+	<field name="feespayment_studentadm" class="java.lang.Integer"/>
+	<field name="feespayment_newbalance" class="java.lang.Integer"/>
+	<field name="student_studentnumber" class="java.lang.Integer"/>
+	<field name="student_studentname" class="java.lang.String"/>
+	<field name="student_sex" class="java.lang.String"/>
+	<field name="student_stream" class="java.lang.String"/>
+	<field name="student_House" class="java.lang.String"/>
+	<field name="student_DOA" class="java.sql.Date"/>
+	<field name="student_Class" class="java.lang.Long"/>
+	<field name="student_ParentsId" class="java.lang.Integer"/>
+	<field name="student_Bcertnumber" class="java.lang.Integer"/>
+	<field name="student_spic" class="java.lang.String"/>
+	<field name="student_sport" class="java.lang.String"/>
+	<field name="student_kcpe" class="java.lang.String"/>
+	<field name="student_club" class="java.lang.String"/>
+	<field name="student_society" class="java.lang.String"/>
+	<field name="student_family" class="java.lang.String"/>
+	<field name="student_cclass" class="java.lang.Integer"/>
+	<field name="student_religion" class="java.lang.String"/>
+	<field name="student_dob" class="java.sql.Date"/>
+	<field name="school_sname" class="java.lang.String"/>
+	<field name="school_scpic" class="java.lang.String"/>
+	<field name="school_address" class="java.lang.String"/>
+	<field name="school_location" class="java.lang.String"/>
+	<field name="feesinstallments_amount" class="java.lang.Integer"/>
+	<field name="feesinstallments_key" class="java.lang.String"/>
+	<field name="feesinstallments_date" class="java.sql.Date"/>
+	<group name="feesstructure_class">
+		<groupExpression><![CDATA[$F{feesstructure_class}]]></groupExpression>
+	</group>
+	<group name="student_stream">
+		<groupExpression><![CDATA[$F{student_stream}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="82" splitType="Stretch">
+			<textField>
+				<reportElement uuid="4b301f7e-4aad-4a1d-adab-2bc0fd315bbf" x="0" y="1" width="555" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{school_sname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="78a2ebaa-ca7a-40c7-8a7f-043baaa21f23" x="0" y="22" width="555" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="15" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{school_address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e2ba74ec-299b-4733-83e9-810219f6e8e7" x="0" y="42" width="555" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="15" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{school_location}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="373b8ae3-0319-4c44-8acf-7baa6d3769ec" x="0" y="62" width="555" height="20"/>
+				<box rightPadding="0">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Fees Payment Report For "+$F{feespayment_year}+" Term "+$F{feespayment_term}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="edcc08c3-7b49-4410-a077-2a432d57f849" x="0" y="5" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[student_cclass]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0ecfecad-8187-43a8-92ca-6115fdae5b50" x="100" y="5" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[student_stream]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7b200c47-f3b1-4289-bf66-025f1b7960e5" x="200" y="5" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[feesinstallments_amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="72fc5e3f-b45b-49f4-a89f-5befe7126baf" x="300" y="5" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[feesstructure_total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="69b4e024-773b-48fd-9f00-e5cf1bd42c8b" x="400" y="5" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[feespayment_newbalance]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="695" splitType="Stretch">
+			<textField>
+				<reportElement uuid="d83b4265-22cf-464f-bcfe-2c9a283a1b05" x="538" y="138" width="21" height="11"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5e0d753e-3d6a-48d3-9bf3-50ce1dca8045" x="0" y="11" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_cclass}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a4588542-bc2b-4eca-82ad-52e0eb171638" x="100" y="11" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_stream}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8a95da41-d9f4-4061-a6bc-d2e8841e1f3b" x="200" y="11" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{feesinstallments_amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="83bea5e1-e0b3-44ef-9d58-e5f4f882d791" x="300" y="11" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{feesstructure_total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4d7451bd-6974-4150-965d-89c69bc1deb5" x="400" y="11" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{feespayment_newbalance}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="40" splitType="Stretch"/>
+	</summary>
+</jasperReport>

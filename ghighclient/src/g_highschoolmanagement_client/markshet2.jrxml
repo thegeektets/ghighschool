@@ -1,0 +1,1752 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="markshet2" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b322906c-690e-4cea-bc84-3c35612db07b">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="158"/>
+	<parameter name="class" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="year" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Term" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Type" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     if(least(score.`exam3`,score.`exam4`,score.`exam5`)!=0,least(if(score.`exam3`!=0,score.`exam3`,100),(if(score.`exam5`!=0,score.`exam5`,100)),(if(score.`exam6`!=0,score.`exam6`,100)),(if(score.`exam7`!=0,score.`exam7`,100)),(if(score.`exam8`!=0,score.`exam8`,100)),(if(score.`exam9`!=0,score.`exam9`,100)),(if(score.`exam10`!=0,score.`exam10`,100)),(if(score.`exam11`!=0,score.`exam11`,100)),(if(score.`exam4`!=0,score.`exam4`,100))),least((if(score.`exam6`!=0,score.`exam6`,100)),(if(score.`exam7`!=0,score.`exam7`,100)),(if(score.`exam8`!=0,score.`exam8`,100)),(if(score.`exam9`!=0,score.`exam9`,100)),(if(score.`exam10`!=0,score.`exam10`,100)),(if(score.`exam11`!=0,score.`exam11`,100)))) AS reduce,
+     if(score.`exam`!=0,score.`exam`,0)+if(score.`exam1`!=0,score.`exam1`,0)+if(score.`exam2`!=0,score.`exam2`,0)+if(score.`exam3`!=0,score.`exam3`,0)+if(score.`exam4`!=0,score.`exam4`,0)+if(score.`exam5`!=0,score.`exam5`,0)+if(score.`exam6`!=0,score.`exam6`,0)+if(score.`exam7`!=0,score.`exam7`,0)+if(score.`exam8`!=0,score.`exam8`,0)+if(score.`exam9`!=0,score.`exam9`,0)+if(score.`exam10`!=0,score.`exam10`,0)+if(score.`exam11`!=0,score.`exam11`,0) AS total,
+     exam.`class` AS exam_class,
+     exam.`stream` AS exam_stream,
+     exam.`term` AS exam_term,
+     exam.`yearofadm` AS exam_yearofadm,
+     exam.`entry` AS exam_entry,
+     score.`admno` AS score_admno,
+     score.`exam` AS score_exam,
+     score.`exam1` AS score_exam1,
+     score.`exam2` AS score_exam2,
+     score.`exam3` AS score_exam3,
+     score.`exam4` AS score_exam4,
+     score.`exam5` AS score_exam5,
+     score.`exam6` AS score_exam6,
+     score.`exam7` AS score_exam7,
+     score.`exam8` AS score_exam8,
+     score.`exam9` AS score_exam9,
+     score.`exam10` AS score_exam10,
+     score.`exam11` AS score_exam11,
+     student.`studentnumber` AS student_studentnumber,
+     student.`studentname` AS student_studentname,
+     student.`sex` AS student_sex,
+     student.`House` AS student_House,
+     student.`spic` AS student_spic,
+     grade.`grade` AS grade_grade,
+     grade.`grade1` AS grade_grade1,
+     grade.`grade2` AS grade_grade2,
+     grade.`grade3` AS grade_grade3,
+     grade.`grade4` AS grade_grade4,
+     grade.`grade5` AS grade_grade5,
+     grade.`grade6` AS grade_grade6,
+     grade.`grade7` AS grade_grade7,
+     grade.`grade8` AS grade_grade8,
+     grade.`grade9` AS grade_grade9,
+     grade.`grade10` AS grade_grade10,
+     grade.`grade11` AS grade_grade11,
+     grade.`admno` AS grade_admno,
+     school.`sname` AS school_sname,
+     school.`scpic` AS school_scpic,
+     score.`examno` AS score_examno,
+     grade.`examno` AS grade_examno,
+     exam.`examtype` AS exam_examtype,
+     exam.`examno` AS exam_examno,
+     student.`cclass` AS student_cclass,
+     student.`stream` AS student_stream,
+     school.`address` AS school_address,
+     school.`location` AS school_location
+FROM
+     `score` score INNER JOIN `student` student ON score.`admno` = student.`studentnumber`
+     INNER JOIN `grade` grade ON student.`studentnumber` = grade.`admno`
+     INNER JOIN `exam` exam ON grade.`examno` = exam.`examno`
+     AND score.`examno` = exam.`examno`,
+     `school` school
+WHERE
+     exam.`class` = $P{class}
+     and exam.`yearofadm` = $P{year}
+     and exam.`term` = $P{Term}
+     and exam.`examtype` = $P{Type}
+ORDER BY
+     total DESC]]>
+	</queryString>
+	<field name="reduce" class="java.lang.Long"/>
+	<field name="total" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="exam_class" class="java.lang.Integer"/>
+	<field name="exam_stream" class="java.lang.String"/>
+	<field name="exam_term" class="java.lang.Integer"/>
+	<field name="exam_yearofadm" class="java.lang.Integer"/>
+	<field name="exam_entry" class="java.lang.Integer"/>
+	<field name="score_admno" class="java.lang.Integer"/>
+	<field name="score_exam" class="java.lang.Integer"/>
+	<field name="score_exam1" class="java.lang.Integer"/>
+	<field name="score_exam2" class="java.lang.Integer"/>
+	<field name="score_exam3" class="java.lang.Integer"/>
+	<field name="score_exam4" class="java.lang.Integer"/>
+	<field name="score_exam5" class="java.lang.Integer"/>
+	<field name="score_exam6" class="java.lang.Integer"/>
+	<field name="score_exam7" class="java.lang.Integer"/>
+	<field name="score_exam8" class="java.lang.Integer"/>
+	<field name="score_exam9" class="java.lang.Integer"/>
+	<field name="score_exam10" class="java.lang.Integer"/>
+	<field name="score_exam11" class="java.lang.Integer"/>
+	<field name="student_studentnumber" class="java.lang.Integer"/>
+	<field name="student_studentname" class="java.lang.String"/>
+	<field name="student_sex" class="java.lang.String"/>
+	<field name="student_House" class="java.lang.String"/>
+	<field name="student_spic" class="java.lang.String"/>
+	<field name="grade_grade" class="java.lang.String"/>
+	<field name="grade_grade1" class="java.lang.String"/>
+	<field name="grade_grade2" class="java.lang.String"/>
+	<field name="grade_grade3" class="java.lang.String"/>
+	<field name="grade_grade4" class="java.lang.String"/>
+	<field name="grade_grade5" class="java.lang.String"/>
+	<field name="grade_grade6" class="java.lang.String"/>
+	<field name="grade_grade7" class="java.lang.String"/>
+	<field name="grade_grade8" class="java.lang.String"/>
+	<field name="grade_grade9" class="java.lang.String"/>
+	<field name="grade_grade10" class="java.lang.String"/>
+	<field name="grade_grade11" class="java.lang.String"/>
+	<field name="grade_admno" class="java.lang.Integer"/>
+	<field name="school_sname" class="java.lang.String"/>
+	<field name="school_scpic" class="java.lang.String"/>
+	<field name="score_examno" class="java.lang.String"/>
+	<field name="grade_examno" class="java.lang.String"/>
+	<field name="exam_examtype" class="java.lang.String"/>
+	<field name="exam_examno" class="java.lang.String"/>
+	<field name="student_cclass" class="java.lang.Integer"/>
+	<field name="student_stream" class="java.lang.String"/>
+	<field name="school_address" class="java.lang.String"/>
+	<field name="school_location" class="java.lang.String"/>
+	<variable name="variable1" class="java.lang.String">
+		<variableExpression><![CDATA[$F{grade_grade9}.replace( "E", "1" ).replace( "D-", "2" ).replace( "D+", "4" ).replace( "D", "3" ).replace( "C-", "5" ).replace( "C+", "7" ).replace( "C", "6" ).replace( "B-", "8" ).replace( "B+", "10").replace( "B", "9" ).replace( "A-", "11" ).replace( "A", "12" ).replace( "Y", "0" )]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="variable2" class="java.lang.String">
+		<variableExpression><![CDATA[$F{grade_grade}.replace( "E", "1" ).replace( "D-", "2" ).replace( "D+", "4" ).replace( "D", "3" ).replace( "C-", "5" ).replace( "C+", "7" ).replace( "C", "8" ).replace( "B-", "8" ).replace( "B+", "10").replace( "B", "9" ).replace( "A-", "11" ).replace( "A", "12" ).replace( "Y", "0" )]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="variable3" class="java.lang.String">
+		<variableExpression><![CDATA[$F{grade_grade1}.replace( "E", "1" ).replace( "D-", "2" ).replace( "D+", "4" ).replace( "D", "3" ).replace( "C-", "5" ).replace( "C+", "7" ).replace( "C", "6" ).replace( "B-", "8" ).replace( "B+", "10").replace( "B", "9" ).replace( "A-", "11" ).replace( "A", "12" ).replace( "Y", "0" )]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="variable4" class="java.lang.String">
+		<variableExpression><![CDATA[$F{grade_grade2}.replace( "E", "1" ).replace( "D-", "2" ).replace( "D+", "4" ).replace( "D", "3" ).replace( "C-", "5" ).replace( "C+", "7" ).replace( "C", "6" ).replace( "B-", "8" ).replace( "B+", "10").replace( "B", "9" ).replace( "A-", "11" ).replace( "A", "12" ).replace( "Y", "0" )]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="variable5" class="java.lang.String">
+		<variableExpression><![CDATA[$F{grade_grade3}.replace( "E", "1" ).replace( "D-", "2" ).replace( "D+", "4" ).replace( "D", "3" ).replace( "C-", "5" ).replace( "C+", "7" ).replace( "C", "6" ).replace( "B-", "8" ).replace( "B+", "10").replace( "B", "9" ).replace( "A-", "11" ).replace( "A", "12" ).replace( "Y", "0" )]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="variable6" class="java.lang.String">
+		<variableExpression><![CDATA[$F{grade_grade4}.replace( "E", "1" ).replace( "D-", "2" ).replace( "D+", "4" ).replace( "D", "3" ).replace( "C-", "5" ).replace( "C+", "7" ).replace( "C", "6" ).replace( "B-", "8" ).replace( "B+", "10").replace( "B", "9" ).replace( "A-", "11" ).replace( "A", "12" ).replace( "Y", "0" )]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="variable7" class="java.lang.String">
+		<variableExpression><![CDATA[$F{grade_grade5}.replace( "E", "1" ).replace( "D-", "2" ).replace( "D+", "4" ).replace( "D", "3" ).replace( "C-", "5" ).replace( "C+", "7" ).replace( "C", "6" ).replace( "B-", "8" ).replace( "B+", "10").replace( "B", "9" ).replace( "A-", "11" ).replace( "A", "12" ).replace( "Y", "0" )]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="variable8" class="java.lang.String">
+		<variableExpression><![CDATA[$F{grade_grade6}.replace( "E", "1" ).replace( "D-", "2" ).replace( "D+", "4" ).replace( "D", "3" ).replace( "C-", "5" ).replace( "C+", "7" ).replace( "C", "6" ).replace( "B-", "8" ).replace( "B+", "10").replace( "B", "9" ).replace( "A-", "11" ).replace( "A", "12" ).replace( "Y", "0" )]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="variable9" class="java.lang.String">
+		<variableExpression><![CDATA[$F{grade_grade7}.replace( "E", "1" ).replace( "D-", "2" ).replace( "D+", "4" ).replace( "D", "3" ).replace( "C-", "5" ).replace( "C+", "7" ).replace( "C", "6" ).replace( "B-", "8" ).replace( "B+", "10").replace( "B", "9" ).replace( "A-", "11" ).replace( "A", "12" ).replace( "Y", "0" )]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="variable10" class="java.lang.String">
+		<variableExpression><![CDATA[$F{grade_grade8}.replace( "E", "1" ).replace( "D-", "2" ).replace( "D+", "4" ).replace( "D", "3" ).replace( "C-", "5" ).replace( "C+", "7" ).replace( "C", "6" ).replace( "B-", "8" ).replace( "B+", "10").replace( "B", "9" ).replace( "A-", "11" ).replace( "A", "12" ).replace( "Y", "0" )]]></variableExpression>
+	</variable>
+	<variable name="variable11" class="java.lang.String">
+		<variableExpression><![CDATA[$F{grade_grade10}.replace( "E", "1" ).replace( "D-", "2" ).replace( "D+", "4" ).replace( "D", "3" ).replace( "C-", "5" ).replace( "C+", "7" ).replace( "C", "6" ).replace( "B-", "8" ).replace( "B+", "10").replace( "B", "9" ).replace( "A-", "11" ).replace( "A", "12" ).replace( "Y", "0" )]]></variableExpression>
+	</variable>
+	<variable name="variable12" class="java.lang.String">
+		<variableExpression><![CDATA[$F{grade_grade11}.replace( "E", "1" ).replace( "D-", "2" ).replace( "D+", "4" ).replace( "D", "3" ).replace( "C-", "5" ).replace( "C+", "7" ).replace( "C", "6" ).replace( "B-", "8" ).replace( "B+", "10").replace( "B", "9" ).replace( "A-", "11" ).replace( "A", "12" ).replace( "Y", "0" )]]></variableExpression>
+	</variable>
+	<variable name="variable13" class="java.lang.Integer">
+		<variableExpression><![CDATA[Integer.parseInt($V{variable1})+Integer.parseInt($V{variable2})+Integer.parseInt($V{variable3})+Integer.parseInt($V{variable4})+Integer.parseInt($V{variable5})+Integer.parseInt($V{variable6})+Integer.parseInt($V{variable7})+Integer.parseInt($V{variable9})+Integer.parseInt($V{variable10})+Integer.parseInt($V{variable11})+Integer.parseInt($V{variable12})]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<variable name="variable14" class="java.lang.String">
+		<variableExpression><![CDATA[$V{variable13}<=17?
+"E":
+$V{variable13}<=29?
+"D-":
+$V{variable13}<=41?
+"D":
+$V{variable13}<=53?
+"D+":
+$V{variable13}<=65?
+"C-":
+$V{variable13}<=77?
+"C":
+$V{variable13}<=89?
+"C+":
+$V{variable13}<=101?
+"B-":
+$V{variable13}<=125?
+"B+":
+$V{variable13}<=137?
+"A-":
+$V{variable13}<=144?
+"A":
+"X"]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="pos" class="java.lang.String"/>
+	<variable name="tot" class="java.lang.String"/>
+	<variable name="leastm" class="java.lang.Integer">
+		<variableExpression><![CDATA[(Integer)$F{reduce}]]></variableExpression>
+		<initialValueExpression><![CDATA[(Integer)$F{reduce}]]></initialValueExpression>
+	</variable>
+	<variable name="leastp" class="java.lang.Integer">
+		<variableExpression><![CDATA[$F{reduce}<=20? 1: $F{reduce}<=28? 2 : $F{reduce}<=38? 3: $F{reduce}<=42? 4: $F{reduce}<=49? 5: $F{reduce}<=56? 6: $F{reduce}<=63? 7: $F{reduce}<=70? 8: $F{reduce}<=77? 9: $F{reduce}<=84? 10: $F{reduce}<=90? 11:$F{reduce}<=100? 12: 0]]></variableExpression>
+		<initialValueExpression><![CDATA[$F{reduce}<=20? 1: $F{reduce}<=28? 2 : $F{reduce}<=38? 3: $F{reduce}<=42? 4: $F{reduce}<=49? 5: $F{reduce}<=56? 6: $F{reduce}<=63? 7: $F{reduce}<=70? 8: $F{reduce}<=77? 9: $F{reduce}<=84? 10: $F{reduce}<=90? 11:$F{reduce}<=100? 12: 0]]></initialValueExpression>
+	</variable>
+	<variable name="ftotal" class="java.lang.Integer">
+		<variableExpression><![CDATA[$F{score_exam}+$F{score_exam1}+$F{score_exam2}+$F{score_exam3}+$F{score_exam4}+$F{score_exam5}+$F{score_exam6}+$F{score_exam7}+$F{score_exam8}+$F{score_exam9}+$F{score_exam10}+$F{score_exam11}]]></variableExpression>
+		<initialValueExpression><![CDATA[$F{score_exam}+$F{score_exam1}+$F{score_exam2}+$F{score_exam3}+$F{score_exam4}+$F{score_exam5}+$F{score_exam6}+$F{score_exam7}+$F{score_exam8}+$F{score_exam9}+$F{score_exam10}+$F{score_exam11}]]></initialValueExpression>
+	</variable>
+	<variable name="total" class="java.lang.Integer">
+		<variableExpression><![CDATA[$V{ftotal}-$V{leastm}]]></variableExpression>
+		<initialValueExpression><![CDATA[$V{ftotal}-$V{leastm}]]></initialValueExpression>
+	</variable>
+	<variable name="fpoints" class="java.lang.Integer">
+		<variableExpression><![CDATA[$V{variable13}]]></variableExpression>
+		<initialValueExpression><![CDATA[$V{variable13}]]></initialValueExpression>
+	</variable>
+	<variable name="points" class="java.lang.Integer">
+		<variableExpression><![CDATA[$V{fpoints}-$V{leastp}]]></variableExpression>
+		<initialValueExpression><![CDATA[$V{fpoints}-$V{leastp}]]></initialValueExpression>
+	</variable>
+	<variable name="dtotal" class="java.lang.Integer">
+		<variableExpression><![CDATA[($F{exam_class}>2?$V{total}:$V{ftotal})]]></variableExpression>
+		<initialValueExpression><![CDATA[($F{exam_class}>2?$V{total}:$V{ftotal})]]></initialValueExpression>
+	</variable>
+	<variable name="dpoints" class="java.lang.Integer">
+		<variableExpression><![CDATA[($F{exam_class}>2?$V{points}:$V{fpoints})]]></variableExpression>
+		<initialValueExpression><![CDATA[($F{exam_class}>2?$V{total}:$V{ftotal})]]></initialValueExpression>
+	</variable>
+	<variable name="variable15" class="java.lang.String">
+		<variableExpression><![CDATA[$V{points}<=10? "E": $V{points}<=17? "D-" : $V{points}<=24? "D": $V{points}<=31? "D+": $V{points}<=38? "C-": $V{points}<=45? "C": $V{points}<=52? "C+": $V{points}<=59? "B-": $V{points}<=66? "B": $V{points}<=73? "B+": $V{points}<=80? "A-":$V{points}<=84? "A" : "X"]]></variableExpression>
+		<initialValueExpression><![CDATA[$V{points}<=10? "E": $V{points}<=17? "D-" : $V{points}<=24? "D": $V{points}<=31? "D+": $V{points}<=38? "C-": $V{points}<=45? "C": $V{points}<=52? "C+": $V{points}<=59? "B-": $V{points}<=66? "B": $V{points}<=73? "B+": $V{points}<=80? "A-":$V{points}<=84? "A" : "X"]]></initialValueExpression>
+	</variable>
+	<variable name="variable16" class="java.lang.String">
+		<variableExpression><![CDATA[$F{exam_class}>2?$V{variable15}:$V{variable14}]]></variableExpression>
+		<initialValueExpression><![CDATA[$F{exam_class}>2?$V{variable15}:$V{variable14}]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="123" splitType="Stretch">
+			<image>
+				<reportElement uuid="38d78f5e-7bf8-412d-9977-9d5f218d68dd" x="0" y="0" width="100" height="78"/>
+				<imageExpression><![CDATA[$F{school_scpic}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement uuid="ca491f3e-f8aa-4392-bc49-0780d6551f71" x="107" y="0" width="448" height="36"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="24" isBold="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{school_sname}]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement uuid="fdb08b84-70a8-463f-892f-df73e992be12" x="0" y="0" width="100" height="78"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+			</frame>
+			<textField>
+				<reportElement uuid="61553b70-a8bb-44d3-96b3-a37ee44f000d" x="0" y="87" width="555" height="27"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="16" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Term "+$F{exam_term}+" "+ $F{exam_yearofadm}+" "+$F{exam_examtype}+" Students Report Form"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="77bd0c00-2921-4d32-94b8-e93867964424" x="107" y="36" width="448" height="22"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{school_address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9d4f6ca0-3396-4709-81f8-3bdab323c661" x="107" y="56" width="448" height="22"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{school_location}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="427" splitType="Stretch">
+			<textField>
+				<reportElement uuid="7184b026-5c27-445e-8a75-c185344db1b6" mode="Transparent" x="226" y="214" width="66" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{score_exam2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="bedbace5-b6c1-4b19-b873-3acc6fae9e81" x="10" y="234" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""+231]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="f3bb1981-fff9-4fd9-a26a-e8f64e7c076c" x="416" y="0" width="125" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c65857ac-776e-47ec-9aaf-bd327277bf33" mode="Transparent" x="226" y="194" width="66" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{score_exam1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="a395c37d-4fe5-405e-8f08-c11a665990be" x="10" y="10" width="134" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[Student Name]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="e873bedd-4e6f-44b2-8494-58481420ca6a" x="226" y="154" width="66" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["SCORES"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a82b292e-cd66-4d95-98e0-cf311fc63f48" mode="Transparent" x="226" y="294" width="66" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{score_exam6}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="56707851-259a-4df6-b6d2-10a632107820" x="10" y="194" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""+102]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="fc153b3f-aeb8-4946-b519-22dbb2466d60" x="10" y="294" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""+311]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="5a07f8bd-c53f-457f-a161-5408b1b89666" x="10" y="50" width="134" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[Student Adm Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ed215843-5229-419b-b590-28a12034bf1d" mode="Transparent" x="110" y="234" width="116" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[Biology]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="feebff22-05e3-4f53-975b-2a1905ea9d77" x="187" y="50" width="164" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{student_studentnumber}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="ebdbfa38-4dc0-4e09-80cb-ab151844502f" mode="Transparent" x="110" y="274" width="116" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[Physics]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="2544343a-c3ec-4724-aaa5-ba4b5298a8e1" mode="Transparent" x="226" y="274" width="66" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{score_exam5}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="26081499-12ae-4cac-87fc-2e8a74ccea60" mode="Transparent" x="226" y="254" width="66" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{score_exam4}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="77a8cd5e-7399-4a97-9bc5-4e415f15755f" mode="Transparent" x="110" y="254" width="116" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[Chemistry]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="0510e352-76cc-4a82-9f72-62c97bdf2b05" x="10" y="214" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""+121]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ca69ba9b-7b9f-4540-bbb7-72e7045e7416" x="292" y="214" width="62" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grade_grade2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f8abb882-2d97-4f05-8319-ea9be2b3ec00" x="292" y="234" width="62" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grade_grade3}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2c555fbe-5863-4529-9a40-56a22a044aba" x="187" y="92" width="164" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{student_cclass}+" "+$F{student_stream}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="0d38fb70-6712-4003-80c8-815b1962ab12" x="292" y="194" width="62" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grade_grade1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a9a2ef1b-cc6e-42de-a1e1-d1ef535dd2a4" x="292" y="254" width="62" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grade_grade4}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b2ea2172-b695-45ab-9fc1-1049ca741dfd" mode="Transparent" x="226" y="174" width="66" height="20" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{score_exam}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f899f6f3-51e1-420a-a1d5-4a40f88d3d32" x="292" y="154" width="62" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["GRADE"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="13c7f943-9bab-47f5-8bf3-e85260d849a2" x="10" y="92" width="134" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[Student Class]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="53179d55-f1c1-4636-b8ed-e6e0abc316ed" x="187" y="10" width="164" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{student_studentname}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="d67cfa1c-d670-4955-8fd7-6f3e1cefecb2" mode="Transparent" x="110" y="194" width="116" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[Kiswahili]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="745a42dc-6621-4dd9-9522-6ef6da5d37c4" x="10" y="174" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""+101]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="56f841ce-e047-41d7-a50d-1785576aaa49" mode="Transparent" x="110" y="214" width="116" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[Mathematics]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="72028f99-4c9c-4039-86cf-86d52c248d56" x="10" y="154" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["CODE"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5c25ebdf-4df5-40f7-b5dd-0217fb8d2e04" x="110" y="154" width="116" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["SUBJECT"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f7f75459-fcec-4c42-8911-9cad18066223" x="10" y="274" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""+232]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement uuid="ccb6f4a6-9788-4f4b-920b-2ad12b0a3217" mode="Opaque" x="406" y="20" width="135" height="119"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<imageExpression><![CDATA[$F{student_spic}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="83648522-119f-433b-822a-9cafa74ba7f7" mode="Transparent" x="110" y="294" width="116" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[History]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="ab5205cd-0066-4235-99ef-17974e243233" x="292" y="294" width="62" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grade_grade6}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="4c8dcb01-a6ea-4b8c-ada4-8425a07ddb85" mode="Transparent" x="110" y="174" width="116" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[English]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="b733792d-89cb-4656-a306-df5b27bded7e" x="292" y="274" width="62" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grade_grade5}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="02403a88-b4a4-4c59-ac19-b16faded8f5b" x="292" y="174" width="62" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grade_grade}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7d176d1f-e4de-45e4-a4c9-59a864b3cefe" mode="Transparent" x="226" y="234" width="66" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{score_exam3}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="cdff966d-5b4c-4b8e-a334-c2b2640edcb4" x="10" y="254" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""+233]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="fd6a872d-5f34-4c89-9506-e0f4ee4e8131" x="292" y="334" width="62" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grade_grade8}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="51bf5957-47ba-42d1-87fe-c986586462cd" x="10" y="394" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""+433]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="25a5e929-efd7-4724-aa15-f4f9f46ec22b" mode="Transparent" x="110" y="354" width="116" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[Business Studies]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bee84446-5c47-4981-a8e4-9c89ec7c1ad9" mode="Transparent" x="110" y="314" width="116" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[Religous Studies]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="5094ecf4-8eed-420c-8fdb-68bd10c73a5c" x="10" y="314" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""+313]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="8b696b98-f33b-4481-80e2-13f4e0b3c6ab" mode="Transparent" x="110" y="334" width="116" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[Geography]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="b953a98b-ee4b-40fc-904d-4a28091922f6" x="10" y="374" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""+451]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="03fc75ce-a792-49cb-9b5c-1a2fdeba4766" mode="Transparent" x="226" y="354" width="66" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{score_exam9}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="13ab5998-0c98-447c-8db4-2840802509c5" x="292" y="394" width="62" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grade_grade11}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ea578600-e79f-4715-95f1-4f96a81fea92" x="292" y="354" width="62" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grade_grade9}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="bcf1fc9b-9c6e-4852-8db4-e0a9f1df52d0" mode="Transparent" x="226" y="394" width="66" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{score_exam11}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="7709c7e4-f9fd-461c-9e49-7aa20d553928" mode="Transparent" x="110" y="394" width="116" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[Agriculture]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="54462dca-7993-438c-a73a-25af6a870f67" mode="Transparent" x="110" y="374" width="116" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[Computer Studies]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="a845aa7f-7194-43c3-a8a4-f937d3b9cf7a" x="10" y="354" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""+565]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ce1f96ac-9ab1-4e4b-8662-c0cea582bc36" mode="Transparent" x="226" y="314" width="66" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{score_exam7}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="aa8f7154-e6b8-4237-8b70-efa8edd5d676" x="292" y="374" width="62" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grade_grade10}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b0f628f9-a656-4e2c-8519-b76375510e3a" mode="Transparent" x="226" y="374" width="66" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{score_exam10}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="54cb255e-4cd2-4948-a724-9bf1594610bf" x="292" y="314" width="62" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grade_grade7}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a7f7fb7f-5dc7-4c76-8753-036fc03497fc" x="10" y="334" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""+312]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a4e9153f-5b1b-470a-9524-22ca4d474bfd" mode="Transparent" x="226" y="334" width="66" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{score_exam8}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e5147b24-9487-4aa2-bc43-951d80228521" x="416" y="194" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grade_grade1}.replace( "E", "Jitahidi" ).replace( "B+", "Vizuri" ).replace( "B-", "Vizuri" ).replace( "B", "Vizuri" ).replace( "A-", "Hongera" ).replace( "A", "Hongera" ).replace( "C+", "Jitahidi" ).replace( "C-", "Jitahidi" ).replace( "C", "Jitahidi" ).replace( "D+", "Tia Bidii" ).replace( "D-", "Tia Bidii" )
+.replace( "D", "Tia Bidii" ).replace( "Y", "" )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ec8039b2-b6b9-4493-9638-12d9bce73644" x="354" y="354" width="62" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grade_grade9}.replace( "E", "1" ).replace( "D-", "2" ).replace( "D+", "4" ).replace( "D", "3" ).replace( "C-", "5" ).replace( "C+", "7" ).replace( "C", "8" ).replace( "B-", "8" ).replace( "B+", "10").replace( "B", "9" ).replace( "A-", "11" ).replace( "A", "12" ).replace( "Y", "0" )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e19895d3-e9be-4f96-ac47-8336a14a24cf" x="416" y="214" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grade_grade2}.replace( "E", "Work Harder" ).replace( "D-", "Work Harder" ).replace( "D+", "Work Harder" )
+.replace( "D", "Work Harder" ).replace( "B-", "Good" ).replace( "B", "Good" ).replace( "B+","Very Good" )
+.replace( "A-", "Very Good" ).replace( "A", "Excellent" ).replace( "C+", "Average" ).replace( "C-", "Average" ).replace( "C", "Average" ).replace( "Y", "" )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="593e90df-7a37-407e-a381-a40b60f1cd8a" x="416" y="294" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grade_grade6}.replace( "E", "Work Harder" ).replace( "D-", "Work Harder" ).replace( "D+", "Work Harder" )
+.replace( "D", "Work Harder" ).replace( "B-", "Good" ).replace( "B", "Good" ).replace( "B+","Very Good" )
+.replace( "A-", "Very Good" ).replace( "A", "Excellent" ).replace( "C+", "Average" ).replace( "C-", "Average" ).replace( "C", "Average" ).replace( "Y", "" )]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="e998ce1f-7ce6-4e08-b3d6-205650e35c16" x="354" y="174" width="62" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grade_grade}.replace( "E", "1" ).replace( "D-", "2" ).replace( "D+", "4" ).replace( "D", "3" ).replace( "C-", "5" ).replace( "C+", "7" ).replace( "C", "6" ).replace( "B-", "8" ).replace( "B+", "10").replace( "B", "9" ).replace( "A-", "11" ).replace( "A", "12" ).replace( "Y", "0" )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c25fc38b-bf90-4ae7-9e34-6e1823237009" x="416" y="354" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grade_grade9}.replace( "E", "Work Harder" ).replace( "D-", "Work Harder" ).replace( "D+", "Work Harder" )
+.replace( "D", "Work Harder" ).replace( "B-", "Good" ).replace( "B", "Good" ).replace( "B+","Very Good" )
+.replace( "A-", "Very Good" ).replace( "A", "Excellent" ).replace( "C+", "Average" ).replace( "C-", "Average" ).replace( "C", "Average" ).replace( "Y", "" )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ad542edc-6684-43d6-a244-4bb8947d46e0" x="416" y="314" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grade_grade7}.replace( "E", "Work Harder" ).replace( "D-", "Work Harder" ).replace( "D+", "Work Harder" )
+.replace( "D", "Work Harder" ).replace( "B-", "Good" ).replace( "B", "Good" ).replace( "B+","Very Good" )
+.replace( "A-", "Very Good" ).replace( "A", "Excellent" ).replace( "C+", "Average" ).replace( "C-", "Average" ).replace( "C", "Average" ).replace( "Y", "" )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ca9eb4c4-0162-4bc4-8e1d-47b890ca61a6" x="354" y="314" width="62" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grade_grade7}.replace( "E", "1" ).replace( "D-", "2" ).replace( "D+", "4" ).replace( "D", "3" ).replace( "C-", "5" ).replace( "C+", "7" ).replace( "C", "6" ).replace( "B-", "8" ).replace( "B+", "10").replace( "B", "9" ).replace( "A-", "11" ).replace( "A", "12" ).replace( "Y", "0" )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="48dcb21a-639e-4769-882f-a2e37848fe19" x="354" y="274" width="62" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grade_grade5}.replace( "E", "1" ).replace( "D-", "2" ).replace( "D+", "4" ).replace( "D", "3" ).replace( "C-", "5" ).replace( "C+", "7" ).replace( "C", "8" ).replace( "8", "6" ).replace( "B-", "8" ).replace( "B+", "10").replace( "B", "9" ).replace( "A-", "11" ).replace( "A", "12" ).replace( "Y", "0" )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5bde2d3b-3a96-4858-9e02-8161c94d0325" x="354" y="214" width="62" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grade_grade2}.replace( "E", "1" ).replace( "D-", "2" ).replace( "D+", "4" ).replace( "D", "3" ).replace( "C-", "5" ).replace( "C+", "7" ).replace( "C", "6" ).replace( "B-", "8" ).replace( "B+", "10").replace( "B", "9" ).replace( "A-", "11" ).replace( "A", "12" ).replace( "Y", "0" )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="40727bbe-df37-4861-8075-df056373ecd5" x="354" y="294" width="62" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grade_grade6}.replace( "E", "1" ).replace( "D-", "2" ).replace( "D+", "4" ).replace( "D", "3" ).replace( "C-", "5" ).replace( "C+", "7" ).replace( "C", "6" ).replace( "B-", "8" ).replace( "B+", "10").replace( "B", "9" ).replace( "A-", "11" ).replace( "A", "12" ).replace( "Y", "0" )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7a7b99fa-7ea1-4ae8-bb41-d1221e58efe7" x="416" y="174" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grade_grade}.replace( "E", "Work Harder" ).replace( "D-", "Work Harder" ).replace( "D+", "Work Harder" )
+.replace( "D", "Work Harder" ).replace( "B-", "Good" ).replace( "B", "Good" ).replace( "B+","Very Good" )
+.replace( "A-", "Very Good" ).replace( "A", "Excellent" ).replace( "C+", "Average" ).replace( "C-", "Average" ).replace( "C", "Average" ).replace( "Y", "" )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d6732a7d-cc1d-42e9-83c9-23f2bd8d7778" x="416" y="394" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grade_grade11}.replace( "E", "Work Harder" ).replace( "D-", "Work Harder" ).replace( "D+", "Work Harder" )
+.replace( "D", "Work Harder" ).replace( "B-", "Good" ).replace( "B", "Good" ).replace( "B+","Very Good" )
+.replace( "A-", "Very Good" ).replace( "A", "Excellent" ).replace( "C+", "Average" ).replace( "C-", "Average" ).replace( "C", "Average" ).replace( "Y", "" )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="dea58f66-b9b3-4a95-b844-a2901e30ef68" x="416" y="154" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["REMARKS"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ffdd5261-e815-43ed-8a79-b4be26fd390f" x="354" y="334" width="62" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grade_grade8}.replace( "E", "1" ).replace( "D-", "2" ).replace( "D+", "4" ).replace( "D", "3" ).replace( "C-", "5" ).replace( "C+", "7" ).replace( "C", "8" ).replace( "B-", "8" ).replace( "B+", "10").replace( "B", "9" ).replace( "A-", "11" ).replace( "A", "12" ).replace( "Y", "0" )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f2add33b-6a1c-4947-b62b-f0fbf5566b2c" x="354" y="194" width="62" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grade_grade1}.replace( "E", "1" ).replace( "D-", "2" ).replace( "D+", "4" ).replace( "D", "3" ).replace( "C-", "5" ).replace( "C+", "7" ).replace( "C", "6" ).replace( "B-", "8" ).replace( "B+", "10").replace( "B", "9" ).replace( "A-", "11" ).replace( "A", "12" ).replace( "Y", "0" )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c5ed7258-6dac-49b0-b1bf-15616244f6cd" x="354" y="374" width="62" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grade_grade10}.replace( "E", "1" ).replace( "D-", "2" ).replace( "D+", "4" ).replace( "D", "3" ).replace( "C-", "5" ).replace( "C+", "7" ).replace( "C", "8" ).replace( "B-", "8" ).replace( "B+", "10").replace( "B", "9" ).replace( "A-", "11" ).replace( "A", "12" ).replace( "Y", "0" )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="29768d90-8b06-4e8b-9afb-85f0d10fa794" x="416" y="374" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grade_grade10}.replace( "E", "Work Harder" ).replace( "D-", "Work Harder" ).replace( "D+", "Work Harder" )
+.replace( "D", "Work Harder" ).replace( "B-", "Good" ).replace( "B", "Good" ).replace( "B+","Very Good" )
+.replace( "A-", "Very Good" ).replace( "A", "Excellent" ).replace( "C+", "Average" ).replace( "C-", "Average" ).replace( "C", "Average" ).replace( "Y", "" )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b0da86ec-14c4-4996-8d91-3245bfcab65d" x="354" y="394" width="62" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grade_grade11}.replace( "E", "1" ).replace( "D-", "2" ).replace( "D+", "4" ).replace( "D", "3" ).replace( "C-", "5" ).replace( "C+", "7" ).replace( "C", "8" ).replace( "B-", "8" ).replace( "B+", "10").replace( "B", "9" ).replace( "A-", "11" ).replace( "A", "12" ).replace( "Y", "0" )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3809f53e-b749-4052-9001-589778cb1369" x="416" y="274" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grade_grade5}.replace( "E", "Work Harder" ).replace( "D-", "Work Harder" ).replace( "D+", "Work Harder" )
+.replace( "D", "Work Harder" ).replace( "B-", "Good" ).replace( "B", "Good" ).replace( "B+","Very Good" )
+.replace( "A-", "Very Good" ).replace( "A", "Excellent" ).replace( "C+", "Average" ).replace( "C-", "Average" ).replace( "C", "Average" ).replace( "Y", "" )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8f76eec8-f8d9-474d-9df2-91fd6f792736" x="354" y="254" width="62" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grade_grade4}.replace( "E", "1" ).replace( "D-", "2" ).replace( "D+", "4" ).replace( "D", "3" ).replace( "C-", "5" ).replace( "C+", "7" ).replace( "C", "8" ).replace( "8", "6" ).replace( "B-", "8" ).replace( "B+", "10").replace( "B", "9" ).replace( "A-", "11" ).replace( "A", "12" ).replace( "Y", "0" )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9a050ad2-b863-454c-9b75-c35ba086f5c5" x="354" y="234" width="62" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grade_grade3}.replace( "E", "1" ).replace( "D-", "2" ).replace( "D+", "4" ).replace( "D", "3" ).replace( "C-", "5" ).replace( "C+", "7" ).replace( "C", "8" ).replace( "B-", "8" ).replace( "B+", "10").replace( "B", "9" ).replace( "A-", "11" ).replace( "A", "12" ).replace( "Y", "0" )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="bcf00633-91bf-4090-8822-a92b420df59d" x="416" y="234" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grade_grade3}.replace( "E", "Work Harder" ).replace( "D-", "Work Harder" ).replace( "D+", "Work Harder" )
+.replace( "D", "Work Harder" ).replace( "B-", "Good" ).replace( "B", "Good" ).replace( "B+","Very Good" )
+.replace( "A-", "Very Good" ).replace( "A", "Excellent" ).replace( "C+", "Average" ).replace( "C-", "Average" ).replace( "C", "Average" ).replace( "Y", "" )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7baf16cb-6f38-475b-aaa0-661ee5737ab4" x="416" y="254" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grade_grade4}.replace( "E", "Work Harder" ).replace( "D-", "Work Harder" ).replace( "D+", "Work Harder" )
+.replace( "D", "Work Harder" ).replace( "B-", "Good" ).replace( "B", "Good" ).replace( "B+","Very Good" )
+.replace( "A-", "Very Good" ).replace( "A", "Excellent" ).replace( "C+", "Average" ).replace( "C-", "Average" ).replace( "C", "Average" ).replace( "Y", "" )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e6f94471-b978-45e6-88ee-29a86eab1a82" x="416" y="334" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grade_grade8}.replace( "E", "Work Harder" ).replace( "D-", "Work Harder" ).replace( "D+", "Work Harder" )
+.replace( "D", "Work Harder" ).replace( "B-", "Good" ).replace( "B", "Good" ).replace( "B+","Very Good" )
+.replace( "A-", "Very Good" ).replace( "A", "Excellent" ).replace( "C+", "Average" ).replace( "C-", "Average" ).replace( "C", "Average" ).replace( "Y", "" )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="08e15265-1bc3-4c35-9e61-81ce68db3928" x="354" y="154" width="62" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["POINTS"]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="235">
+			<staticText>
+				<reportElement uuid="96e6c951-c808-497f-9c0b-2f1c9e0292b7" x="267" y="10" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[Position]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="8393242e-300c-4192-b6f6-e7b53e9aad3a" x="389" y="10" width="40" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="cd87ac5b-496a-4556-a458-5590af2947cd" x="143" y="11" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{dtotal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="60ff86fc-7e82-47b6-a4fd-c763878c3419" x="23" y="75" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[Mean Grade]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="145c6a8d-2f59-4f06-8737-05833c140cc2" x="141" y="44" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""+$V{dpoints}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="21717d22-3893-4d78-8ced-44dbd69f5fc8" x="23" y="10" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[Total Marks]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="1b5d1e7b-ead1-4342-b1ac-6cd0555abe08" x="1" y="189" width="555" height="38"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{variable16}.replace( "A", "Good work,aim for super grades in all subjects").
+replace( "A-", "Good work,aim for super grades in all subjects").
+replace( "B+", "Good work,aim for super grades in all subjects").
+replace( "B-", "Average ,work on your weak subjects to  better your performance ").
+
+replace( "B", "Good work,aim for super grades in all subjects").
+replace( "C+", "Average ,work on your weak subjects to  better your performance ").
+
+replace( "C", "Average ,work on your weak subjects to  better your performance ").
+replace( "C-", "Eliminate D's and C's to better your performance").
+
+replace( "D+", "Eliminate D's and C's to better your performance").
+replace( "D-", "You can do better than this if you put more efforts on your work").
+replace( "D", "You can do better than this if you put more efforts on your work").
+replace( "D", "You can do better than this if you put more efforts on your work")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6f45ca52-0d37-4516-b756-35d2fee98517" x="141" y="75" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""+$V{variable16}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="00d0ecd0-0871-49c9-a81d-3fd5c6ce100d" x="429" y="10" width="46" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[Out Of]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4555bd0c-e544-4e87-95e0-d4e22f41bf16" x="23" y="44" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[Total Points]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e49d3450-955e-4107-9f23-39bfb266bd84" x="1" y="162" width="240" height="16"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Deputy/Head Teacher's Comment]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="72b7d27a-a45c-43c2-ad53-c5e40b82faba" x="1" y="106" width="242" height="18"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Class Teacher's Comment]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="c2d9abd3-290b-495f-8c10-f0a81b8f6638" x="1" y="124" width="555" height="38"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{variable16}.replace( "A-", "Good work,Keep it up").replace( "A", "Good work,Keep it up").replace( "B+", "Good work,Keep it up").replace( "B-", "Good work but there is still room for improvement").
+replace( "B", "Good work ,Keep it up").replace( "C+", "Good work but there is still more room for improvement").replace( "C-", "You can  do better than this").replace( "C", "You can do better than this").replace( "D+", "You can do better than this").replace( "D-", "Below average,please work harder").replace( "E", "Below average,please work harder")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7ebe883f-29dc-4e7b-a491-8325736cbb2f" x="416" y="40" width="80" height="4"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="28e98fb1-3716-47f9-9a76-3a0e7babacf2" x="476" y="11" width="40" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
