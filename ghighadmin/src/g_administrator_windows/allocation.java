@@ -340,7 +340,6 @@ PreparedStatement st=mycon.prepareStatement("insert into subjectallocation value
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        brownSugar1 = new com.jgoodies.looks.plastic.theme.BrownSugar();
         pnllogin = new javax.swing.JPanel();
         btnsave = new javax.swing.JButton();
         lblusername2 = new javax.swing.JLabel();
@@ -354,7 +353,6 @@ PreparedStatement st=mycon.prepareStatement("insert into subjectallocation value
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtterm = new javax.swing.JComboBox();
-        txtyear = new com.toedter.calendar.JYearChooser();
         txttotal = new javax.swing.JTextField();
         lblwarning = new javax.swing.JLabel();
         lblfooter = new javax.swing.JLabel();
@@ -459,10 +457,10 @@ PreparedStatement st=mycon.prepareStatement("insert into subjectallocation value
             }
         });
         tblclasses.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 tblclassesInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         tblclasses.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -518,8 +516,7 @@ PreparedStatement st=mycon.prepareStatement("insert into subjectallocation value
                         .addGap(65, 65, 65)
                         .addGroup(pnlloginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtterm, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtyear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtteacherid, 0, 136, Short.MAX_VALUE)
+                            .addComponent(txtteacherid, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txttotal))
                         .addGap(81, 81, 81)
                         .addGroup(pnlloginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -544,10 +541,8 @@ PreparedStatement st=mycon.prepareStatement("insert into subjectallocation value
                 .addGroup(pnlloginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlloginLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnlloginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtyear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
                         .addGroup(pnlloginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtterm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -592,7 +587,7 @@ PreparedStatement st=mycon.prepareStatement("insert into subjectallocation value
                 .addContainerGap()
                 .addComponent(pnllogin, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblfooter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblfooter, javax.swing.GroupLayout.DEFAULT_SIZE, 15, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -707,7 +702,6 @@ if(rs.next()){
     }//GEN-LAST:event_tblclassesKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.jgoodies.looks.plastic.theme.BrownSugar brownSugar1;
     private javax.swing.JButton btnedit;
     private javax.swing.JButton btnexit;
     private javax.swing.JButton btnsave;
@@ -724,6 +718,5 @@ if(rs.next()){
     private javax.swing.JComboBox txtteacherid;
     private javax.swing.JComboBox txtterm;
     private javax.swing.JTextField txttotal;
-    private com.toedter.calendar.JYearChooser txtyear;
     // End of variables declaration//GEN-END:variables
 }

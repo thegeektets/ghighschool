@@ -75,7 +75,6 @@ public class examreports extends javax.swing.JInternalFrame {
         lblphone = new javax.swing.JLabel();
         txtclass1 = new javax.swing.JComboBox();
         txtstream1 = new javax.swing.JComboBox();
-        txtyear1 = new com.toedter.calendar.JYearChooser();
         pnlotherdetails = new javax.swing.JPanel();
         lblhome = new javax.swing.JLabel();
         lblemail = new javax.swing.JLabel();
@@ -135,22 +134,6 @@ public class examreports extends javax.swing.JInternalFrame {
         txtstream1.setEditable(true);
         txtstream1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "North", "South", "East", "West" }));
 
-        txtyear1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                txtyear1MouseEntered(evt);
-            }
-        });
-        txtyear1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                txtyear1PropertyChange(evt);
-            }
-        });
-        txtyear1.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
-            public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
-                txtyear1VetoableChange(evt);
-            }
-        });
-
         org.jdesktop.layout.GroupLayout pnlprsnldetailsLayout = new org.jdesktop.layout.GroupLayout(pnlprsnldetails);
         pnlprsnldetails.setLayout(pnlprsnldetailsLayout);
         pnlprsnldetailsLayout.setHorizontalGroup(
@@ -163,9 +146,8 @@ public class examreports extends javax.swing.JInternalFrame {
                     .add(org.jdesktop.layout.GroupLayout.LEADING, lblfullname, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(pnlprsnldetailsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(txtclass1, 0, 192, Short.MAX_VALUE)
-                    .add(txtstream1, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(txtyear1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .add(txtclass1, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(txtstream1, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnlprsnldetailsLayout.setVerticalGroup(
@@ -181,10 +163,8 @@ public class examreports extends javax.swing.JInternalFrame {
                     .add(lblogender, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(txtstream1))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(pnlprsnldetailsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(lblphone, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 26, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(txtyear1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(lblphone, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 26, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         pnlotherdetails.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -230,7 +210,7 @@ public class examreports extends javax.swing.JInternalFrame {
                     .add(lblhome1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 122, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .add(18, 18, 18)
                 .add(pnlotherdetailsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(txtterm1, 0, 219, Short.MAX_VALUE)
+                    .add(txtterm1, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(txtetype1, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(txtsearch)))
         );
@@ -279,9 +259,9 @@ public class examreports extends javax.swing.JInternalFrame {
             .add(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                    .add(jButton1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)
+                    .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .add(btnmarksheetp, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(156, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -290,7 +270,7 @@ public class examreports extends javax.swing.JInternalFrame {
                 .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 37, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(18, 18, 18)
                 .add(btnmarksheetp, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 37, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tbpreports.addTab("Marksheets", jPanel1);
@@ -329,7 +309,7 @@ public class examreports extends javax.swing.JInternalFrame {
                 .add(266, 266, 266))
             .add(jPanel2Layout.createSequentialGroup()
                 .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                    .add(btnmarksheetp1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
+                    .add(btnmarksheetp1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .add(btnpreview, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .add(0, 0, Short.MAX_VALUE))
         );
@@ -2042,6 +2022,5 @@ int       p125=rs124.getInt("col124");
     private javax.swing.JTextField txtsearch;
     private javax.swing.JComboBox txtstream1;
     private javax.swing.JComboBox txtterm1;
-    private com.toedter.calendar.JYearChooser txtyear1;
     // End of variables declaration//GEN-END:variables
 }

@@ -124,7 +124,6 @@ public class adminorgsetup extends javax.swing.JFrame {
         txtsex = new javax.swing.JComboBox();
         txtpassword = new javax.swing.JPasswordField();
         txtcpassword = new javax.swing.JPasswordField();
-        txtdob = new com.toedter.calendar.JDateChooser();
         txtidnumber = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -289,9 +288,8 @@ public class adminorgsetup extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(txtpassword)
                                 .addGap(1, 1, 1))
-                            .addComponent(txtpriviledges)
-                            .addComponent(txtcpassword)
-                            .addComponent(txtdob, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)))
+                            .addComponent(txtpriviledges, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                            .addComponent(txtcpassword)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
@@ -330,10 +328,8 @@ public class adminorgsetup extends javax.swing.JFrame {
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtsex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtdob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -645,7 +641,6 @@ public class adminorgsetup extends javax.swing.JFrame {
     private javax.swing.JPanel pnlmain;
     private javax.swing.JPasswordField txtcpassword;
     private javax.swing.JTextField txtdepartment;
-    private com.toedter.calendar.JDateChooser txtdob;
     private javax.swing.JTextField txtemail;
     private javax.swing.JTextField txtfullname;
     private javax.swing.JTextField txthint;

@@ -113,7 +113,6 @@ static boolean canWrite(String folderPath) {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        brownSugar1 = new com.jgoodies.looks.plastic.theme.BrownSugar();
         pnllogin = new javax.swing.JPanel();
         lbldbpassword = new javax.swing.JLabel();
         lblipaddress = new javax.swing.JLabel();
@@ -357,7 +356,6 @@ static boolean canWrite(String folderPath) {
     }//GEN-LAST:event_txtdatabaseActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.jgoodies.looks.plastic.theme.BrownSugar brownSugar1;
     private javax.swing.JButton btnexit;
     private javax.swing.JButton btnsave;
     private javax.swing.JLabel jLabel1;
